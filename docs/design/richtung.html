@@ -9,250 +9,277 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Farbwelt «Lichtfeld» */
-  --kreide:#F5F2EC;   /* Grund */
-  --stein:#E8E3DA;
-  --salbei:#A9BCA9;
-  --pfirsich:#F1CDBB;
-  --flieder:#D6D0EA;
-  --nebel:#C6D5E6;
-  --moos:#2F4A3F;     /* Handlung */
-  --moos-2:#46675A;
-  --tinte:#1D211F;    /* Text */
-  --tinte-2:#6E726E;
-  --tinte-3:#A7A9A3;
-  --haar:rgba(29,33,31,.09);
-  --glas:rgba(255,255,255,.58);
-  --pad:#B9CBB9;
-
+  --sand:#F5F3EE;      /* Grund */
+  --weiss:#FFFFFF;
+  --stein:#ECE8E1;
+  --salbei:#A3B8A5;
+  --salbei-hell:#DCE5DB;
+  --pfirsich:#F2D6C8;
+  --flieder:#DCD5EA;
+  --blau:#C9D8EA;
+  --wald:#304C3F;      /* Handlung */
+  --anthrazit:#1F2421; /* Text */
+  --grau:#737873;
+  --grau-2:#A9ADA8;
+  --haar:rgba(31,36,33,.08);
   --display:"Instrument Sans",-apple-system,system-ui,sans-serif;
   --ui:-apple-system,"SF Pro Text","Instrument Sans",system-ui,sans-serif;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#EAE6DE;color:var(--tinte);font-family:var(--ui);-webkit-font-smoothing:antialiased;padding:48px 16px 80px}
+body{background:#EEEBE5;color:var(--anthrazit);font-family:var(--ui);-webkit-font-smoothing:antialiased;padding:48px 16px 80px}
 .num{font-variant-numeric:tabular-nums}
 
-/* Kopf der Präsentation */
-.intro{max-width:1640px;margin:0 auto 44px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
-.intro small{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--tinte-2)}
-.intro h1{font-family:var(--display);font-weight:400;font-size:56px;letter-spacing:-.035em;line-height:1;margin-top:14px}
-.intro p{font-size:16px;line-height:1.55;color:var(--tinte-2);max-width:56ch}
-@media (max-width:900px){.intro{grid-template-columns:1fr}.intro h1{font-size:40px}}
+.intro{max-width:1500px;margin:0 auto 40px;display:flex;justify-content:space-between;gap:40px;align-items:flex-end;flex-wrap:wrap}
+.intro small,.cap,.sys h3{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--grau);font-weight:500}
+.intro h1{font-family:var(--display);font-weight:400;font-size:52px;letter-spacing:-.035em;line-height:1;margin-top:12px}
+.intro p{font-size:15.5px;line-height:1.55;color:var(--grau);max-width:52ch}
 
-.row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;max-width:1720px;margin:0 auto}
-figure{display:flex;flex-direction:column;gap:16px}
-figure>small{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--tinte-2);padding-left:4px}
-figcaption{font-size:13.5px;line-height:1.5;color:var(--tinte-2);max-width:300px;padding-left:4px}
+.row{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;max-width:1500px;margin:0 auto}
+figure{display:flex;flex-direction:column;gap:14px}
+figure .cap{padding-left:4px}
+figcaption{font-size:13.5px;line-height:1.5;color:var(--grau);max-width:310px;padding-left:4px}
 
 /* Gerät */
-.phone{width:390px;height:844px;border-radius:56px;background:var(--kreide);position:relative;overflow:hidden;isolation:isolate;
-  box-shadow:0 0 0 10px #151816,0 0 0 11px #2a2e2b,0 50px 80px -40px rgba(30,30,20,.45)}
-.phone::after{content:"";position:absolute;inset:0;background-image:var(--grain);pointer-events:none;z-index:50;mix-blend-mode:multiply}
-.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:36px;border-radius:20px;background:#0b0c0c;z-index:60}
-.status{position:relative;z-index:20;height:54px;display:flex;justify-content:space-between;align-items:center;padding:6px 34px 0 40px;font-weight:600;font-size:16px}
-.status svg{height:12px}
-.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:var(--tinte);z-index:40}
-.content{position:relative;z-index:10;padding:0 26px;height:calc(100% - 54px);display:flex;flex-direction:column}
-
-/* Lichtfelder */
-.atmo{position:absolute;inset:0;z-index:0;overflow:hidden}
-.atmo i{position:absolute;border-radius:50%;filter:blur(46px);opacity:.9}
-@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-14px) scale(1.08)}}
-@keyframes drift2{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-22px,16px) scale(.96)}}
-.atmo i:nth-child(odd){animation:drift 14s ease-in-out infinite}
-.atmo i:nth-child(even){animation:drift2 17s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.atmo i{animation:none!important}}
+.phone{width:375px;height:812px;border-radius:54px;background:var(--sand);position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:0 0 0 9px #161917,0 0 0 10px #2c302d,0 50px 80px -45px rgba(30,30,20,.5)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:118px;height:34px;border-radius:20px;background:#0b0c0c;z-index:60}
+.status{position:relative;z-index:20;height:52px;display:flex;justify-content:space-between;align-items:center;padding:6px 30px 0 38px;font-weight:600;font-size:15px}
+.status svg{height:11px}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:3px;background:var(--anthrazit);z-index:40}
+.content{position:relative;z-index:10;padding:0 22px;height:calc(100% - 52px);display:flex;flex-direction:column}
+.glow{position:absolute;z-index:0;border-radius:50%;filter:blur(50px)}
 
 /* Typografie */
-.kicker{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--tinte-2);font-weight:500}
-.hero{font-family:var(--display);font-weight:400;font-size:46px;letter-spacing:-.04em;line-height:1.02}
-.h1{font-family:var(--display);font-weight:400;font-size:36px;letter-spacing:-.035em;line-height:1.05}
-.meta{font-size:14.5px;color:var(--tinte-2);margin-top:6px}
-.label{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tinte-2);font-weight:500}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grau);font-weight:500}
+.hero{font-family:var(--display);font-weight:400;font-size:42px;letter-spacing:-.04em;line-height:1.04}
+.h1{font-family:var(--display);font-weight:400;font-size:32px;letter-spacing:-.03em;line-height:1.08}
+.lead{font-size:16px;color:var(--grau);line-height:1.4;margin-top:10px}
+.sub{font-size:13.5px;color:var(--grau);margin-top:2px}
+.label{font-size:12px;color:var(--grau);font-weight:500}
 
-/* Bausteine */
-.glass{background:var(--glas);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.65),0 10px 30px -18px rgba(40,40,30,.25)}
-.cta{display:flex;align-items:center;justify-content:center;gap:10px;height:60px;border-radius:30px;background:var(--moos);color:#F4F2EC;font-size:17px;font-weight:600;letter-spacing:-.01em;box-shadow:0 14px 30px -16px rgba(47,74,63,.7)}
-.arrow{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
-.arrow svg,.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.hair{height:1px;background:var(--haar)}
+/* Flächen */
+.tile{background:var(--weiss);border-radius:22px;box-shadow:0 1px 2px rgba(31,36,33,.04),0 8px 24px -16px rgba(31,36,33,.18)}
+.cta{display:flex;align-items:center;justify-content:center;height:56px;border-radius:28px;background:var(--wald);color:#F3F1EC;font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+.round{width:38px;height:38px;border-radius:50%;background:var(--weiss);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px -8px rgba(0,0,0,.25)}
+.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav{display:flex;justify-content:space-between;align-items:center;height:44px;margin-top:4px}
 
-.tabs{position:absolute;left:14px;right:14px;bottom:26px;height:64px;border-radius:32px;display:flex;justify-content:space-around;align-items:center;z-index:30}
-.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:500;color:var(--tinte-3);width:70px}
-.tab.on{color:var(--tinte)}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:84px;padding:10px 18px 0;display:flex;justify-content:space-around;background:var(--sand);border-top:1px solid var(--haar);z-index:30}
+.tab{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10.5px;font-weight:500;color:var(--grau-2);width:64px}
+.tab.on{color:var(--anthrazit)}
 .tab svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-/* Geräte-Miniatur */
-.thumb{flex:none;border-radius:22px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--tinte)}
-.thumb::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 35% 35%,var(--t) 0%,transparent 70%);filter:blur(6px)}
-.thumb svg{position:relative;width:84%;height:84%}
-.t-bein{--t:var(--pfirsich)} .t-ruecken{--t:var(--nebel)} .t-brust{--t:var(--salbei)} .t-rumpf{--t:var(--flieder)}
+/* Geräte-Bild */
+.pic{flex:none;border-radius:18px;background:var(--stein);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pic svg{width:92%;height:92%}
 
-.dev{display:flex;align-items:center;gap:16px;padding:12px 0}
-.dev .tx{flex:1;min-width:0}
-.dev b{display:block;font-size:17px;font-weight:600;letter-spacing:-.015em}
-.dev span{display:block;font-size:13.5px;color:var(--tinte-2);margin-top:2px}
-.dev em{font-style:normal;font-size:13.5px;color:var(--tinte-2)}
-.idx{font-family:var(--display);font-size:13px;color:var(--moos-2);font-weight:500;width:14px}
-.pips{display:flex;gap:4px}.pips i{width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1.4px var(--tinte-3)}.pips i.f{background:var(--moos);box-shadow:none}
-.done{opacity:.42}
+/* Liste */
+.item{display:flex;align-items:center;gap:14px;padding:10px 14px 10px 10px;margin-top:10px}
+.item .tx{flex:1;min-width:0}
+.item b{display:block;font-size:16px;font-weight:600;letter-spacing:-.015em}
+.item .val{font-size:13px;color:var(--anthrazit);margin-top:5px}
+.rec-n{font-family:var(--display);font-size:13px;font-weight:500;color:var(--wald);background:var(--salbei-hell);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.pips{display:flex;gap:4px}.pips i{width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1.4px var(--grau-2)}.pips i.f{background:var(--wald);box-shadow:none}
+.mini{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--haar)}
+.mini:last-child{border-bottom:0}
+.mini b{flex:1;font-size:15px;font-weight:500;letter-spacing:-.01em}
+.done{opacity:.45}
+
+/* Detail */
+.halo{position:relative;height:250px;display:flex;align-items:center;justify-content:center;margin-top:-6px}
+.halo::before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,var(--salbei-hell) 0%,rgba(220,229,219,.5) 55%,transparent 72%)}
+.halo svg{position:relative;width:230px;height:230px}
+.segl{display:flex;gap:22px;margin-top:18px;font-size:14px;color:var(--grau);border-bottom:1px solid var(--haar)}
+.segl span{padding-bottom:10px}
+.segl .on{color:var(--anthrazit);font-weight:600;box-shadow:inset 0 -2px 0 var(--anthrazit)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.grid3 div{background:var(--weiss);border-radius:16px;padding:12px 10px;text-align:center}
+.grid3 small{display:block;font-size:11.5px;color:var(--grau)}
+.grid3 b{display:block;font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-.03em;margin-top:3px}
+.edit{font-size:13px;color:var(--wald);font-weight:600}
 
 /* Satz */
-.settings{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px}
-.settings div{padding:2px 0 2px 14px;border-left:1px solid var(--haar)}
-.settings div:first-child{border-left:0;padding-left:0}
-.settings small{display:block;font-size:12px;color:var(--tinte-2)}
-.settings b{display:block;font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-.03em;margin-top:2px}
-.dual{display:grid;grid-template-columns:1fr 1px 1fr;border-radius:30px;padding:20px 8px 16px;margin-top:12px}
-.dual .sep{background:var(--haar)}
-.dual .c{text-align:center}
-.dual .v{font-family:var(--display);font-size:54px;font-weight:400;letter-spacing:-.05em;line-height:1}
-.dual .u{font-size:12.5px;color:var(--tinte-2);margin-top:4px}
-.pm{display:flex;justify-content:center;gap:12px;margin-top:14px}
-.pm span{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px var(--haar)}
-.pm svg{width:18px;height:18px;stroke:var(--tinte);stroke-width:2;stroke-linecap:round}
+.stepper{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;margin-top:12px}
+.stepper .v{text-align:center}
+.stepper .v b{display:block;font-family:var(--display);font-weight:400;font-size:58px;letter-spacing:-.05em;line-height:1}
+.stepper .v small{font-size:12.5px;color:var(--grau)}
+.pm{width:52px;height:52px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center}
+.pm svg{width:18px;height:18px;stroke:var(--anthrazit);stroke-width:2;stroke-linecap:round}
+.setlog{display:flex;justify-content:space-between;font-size:14px;padding:12px 2px;border-bottom:1px solid var(--haar)}
+.setlog span:first-child{color:var(--grau)}
 
 /* Pause */
-.timer{position:relative;width:264px;height:264px;margin:44px auto 0;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.timer svg.r{position:absolute;inset:0;transform:rotate(-90deg)}
-.timer .v{font-family:var(--display);font-size:84px;font-weight:400;letter-spacing:-.06em}
-.ctrl{display:flex;justify-content:center;gap:22px;margin-top:22px;align-items:center}
-.ctrl span{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.timer{position:relative;width:250px;height:250px;margin:30px auto 0;display:flex;align-items:center;justify-content:center}
+.timer svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.timer b{font-family:var(--display);font-size:78px;font-weight:400;letter-spacing:-.06em}
+.ctrl{display:flex;justify-content:center;align-items:center;gap:26px;margin-top:18px}
+.ctrl span{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:600}
+.ctrl span.big{width:64px;height:64px;background:var(--wald);color:#F3F1EC}
 .feel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.feel div{height:64px;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:500;color:var(--tinte-2)}
-.feel div.on{background:#fff;color:var(--tinte);box-shadow:0 10px 24px -14px rgba(40,40,30,.45)}
-.lv{display:flex;gap:3px;align-items:flex-end;height:12px}.lv i{width:4px;border-radius:2px;background:currentColor;opacity:.3}
+.feel div{height:60px;border-radius:20px;background:rgba(255,255,255,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:13.5px;font-weight:500;color:var(--grau)}
+.feel div.on{background:var(--weiss);color:var(--anthrazit);box-shadow:0 8px 20px -12px rgba(0,0,0,.3)}
+.lv{display:flex;gap:3px;align-items:flex-end;height:12px}.lv i{width:4px;border-radius:2px;background:currentColor;opacity:.28}
 .lv i:nth-child(1){height:5px}.lv i:nth-child(2){height:8px}.lv i:nth-child(3){height:12px}
 .lv.l1 i:nth-child(1),.lv.l2 i:nth-child(-n+2),.lv.l3 i{opacity:1}
 
 /* Verlauf */
-.seg{display:flex;padding:4px;border-radius:20px;margin-top:20px}
-.seg div{flex:1;text-align:center;padding:9px;border-radius:16px;font-size:14px;font-weight:500;color:var(--tinte-2)}
-.seg .on{background:#fff;color:var(--tinte);box-shadow:0 4px 12px -6px rgba(0,0,0,.2)}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:13px;margin-top:16px;text-align:center}
-.cal small{font-size:11px;color:var(--tinte-3);font-weight:500}
-.cal i{display:block;margin:0 auto;width:8px;height:8px;border-radius:50%;background:var(--stein)}
-.cal i.g{background:var(--moos);width:10px;height:10px}
-.cal i.r{background:#8AA6C6;width:10px;height:10px}
+.seg{display:flex;background:var(--stein);border-radius:14px;padding:3px;margin-top:18px}
+.seg div{flex:1;text-align:center;padding:8px;border-radius:11px;font-size:13.5px;font-weight:500;color:var(--grau)}
+.seg .on{background:var(--weiss);color:var(--anthrazit);box-shadow:0 2px 8px -4px rgba(0,0,0,.2)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:12px;text-align:center;margin-top:14px}
+.cal small{font-size:10.5px;color:var(--grau-2);font-weight:500}
+.cal i{display:block;margin:0 auto;width:7px;height:7px;border-radius:50%;background:#DDD8CF}
+.cal i.g{background:var(--wald);width:9px;height:9px}
+.cal i.r{background:#8FA8C4;width:9px;height:9px}
 .cal i.x{background:transparent}
-.facts{display:flex;gap:28px;margin-top:24px}
-.facts b{display:block;font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:-.04em;line-height:1}
-.facts small{font-size:12.5px;color:var(--tinte-2)}
-.log{display:flex;align-items:center;gap:14px;padding:13px 0}
-.log .g{width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:none}
-.log .g svg{width:20px;height:20px;fill:none;stroke:var(--tinte);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.log .tx{flex:1}.log b{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em}.log span{font-size:13px;color:var(--tinte-2)}
-.log em{font-style:normal;font-size:13px;color:var(--tinte-2)}
+.log{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--haar)}
+.log:last-child{border-bottom:0}
+.log .g{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--stein)}
+.log .g svg{width:19px;height:19px;fill:none;stroke:var(--anthrazit);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.log .tx{flex:1}.log b{display:block;font-size:15px;font-weight:600}.log span{font-size:12.5px;color:var(--grau)}
+.log em{font-style:normal;font-size:12.5px;color:var(--grau)}
 
 /* System */
-.system{max-width:1640px;margin:80px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px}
-@media (max-width:1100px){.system{grid-template-columns:1fr}}
-.system h3{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--tinte-2);font-weight:500;margin-bottom:18px}
+.sys{max-width:1500px;margin:80px auto 0;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px}
+@media (max-width:1100px){.sys{grid-template-columns:1fr}}
+.sys h3{margin-bottom:18px}
 .sw{display:flex;gap:14px;flex-wrap:wrap}
-.sw div{width:76px}
-.sw i{display:block;width:76px;height:96px;border-radius:38px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
-.sw b{display:block;font-size:13px;margin-top:8px;font-weight:600}.sw span{font-size:11.5px;color:var(--tinte-2)}
-.typo .a{font-family:var(--display);font-size:64px;letter-spacing:-.045em;line-height:1}
-.typo p{font-size:14px;color:var(--tinte-2);line-height:1.6;margin-top:16px}
-.princ p{font-size:14.5px;line-height:1.6;color:var(--tinte-2);margin-bottom:14px}
-.princ b{color:var(--tinte);font-weight:600}
-.fields{display:flex;gap:12px;margin-top:22px}
-.fields i{flex:1;height:110px;border-radius:28px;position:relative;overflow:hidden}
+.sw div{width:64px}
+.sw i{display:block;width:64px;height:64px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.sw b{display:block;font-size:12.5px;margin-top:8px;font-weight:600}.sw span{font-size:11px;color:var(--grau)}
+.typo .a{font-family:var(--display);font-size:58px;letter-spacing:-.045em;line-height:1}
+.sys p{font-size:14px;color:var(--grau);line-height:1.6;margin-top:14px}
+.sys p b{color:var(--anthrazit)}
 </style>
 </head>
 <body>
 
-<!-- Illustrationen: eigene, einheitliche Linienzeichnungen -->
+<!-- Geräte: flächige Darstellungen, einheitliche Bauweise -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
-  <symbol id="m-latzug" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M22 104h76"/><path d="M80 104V14H34v14"/><path d="M80 14h12v38"/>
-    <rect x="85" y="52" width="14" height="40" rx="2.5"/><path d="M85 62h14M85 72h14M85 82h14"/>
-    <path d="M18 33q16-6 32 0"/><path d="M45 104V68"/>
-    <rect x="32" y="61" width="26" height="7" rx="3.5" style="fill:var(--pad)"/>
-    <rect x="27" y="78" width="36" height="8" rx="4" style="fill:var(--pad)"/></g></symbol>
-  <symbol id="m-beinpresse" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 102h96"/><path d="M34 102V86M92 102V36"/><path d="M60 82h26"/>
-    <rect x="22" y="76" width="38" height="9" rx="4.5" style="fill:var(--pad)"/>
-    <rect x="16" y="38" width="10" height="38" rx="5" transform="rotate(-16 21 57)" style="fill:var(--pad)"/>
-    <rect x="84" y="38" width="9" height="46" rx="3" style="fill:var(--pad)"/>
-    <path d="M46 76v-9h8"/><circle cx="104" cy="62" r="8"/><path d="M93 62h3"/></g></symbol>
-  <symbol id="m-brustpresse" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14 104h86"/><path d="M38 104V20"/><path d="M38 24h20q16 0 22 20v6"/><path d="M80 44v16"/>
-    <rect x="14" y="50" width="14" height="40" rx="2.5"/><path d="M14 60h14M14 70h14M14 80h14"/><path d="M28 30h10"/>
-    <rect x="40" y="32" width="9" height="40" rx="4.5" style="fill:var(--pad)"/>
-    <rect x="40" y="74" width="32" height="8" rx="4" style="fill:var(--pad)"/><path d="M56 82v22"/></g></symbol>
-  <symbol id="m-rudern" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 104h96"/><path d="M98 104V22"/><path d="M98 34L56 52"/><path d="M56 45v14"/>
-    <rect x="66" y="42" width="9" height="32" rx="4.5" style="fill:var(--pad)"/><path d="M70 74v30"/>
-    <rect x="18" y="76" width="34" height="8" rx="4" style="fill:var(--pad)"/><path d="M35 84v20"/>
-    <rect x="102" y="56" width="10" height="36" rx="2"/></g></symbol>
-  <symbol id="m-schulter" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M14 104h90"/><path d="M34 104V16"/><path d="M34 18h22q12 0 16 14"/><path d="M72 26v16"/>
-    <rect x="36" y="28" width="9" height="48" rx="4.5" style="fill:var(--pad)"/>
-    <rect x="36" y="78" width="34" height="8" rx="4" style="fill:var(--pad)"/><path d="M53 86v18"/>
-    <rect x="14" y="50" width="12" height="40" rx="2.5"/><path d="M26 22h8"/></g></symbol>
-  <symbol id="m-beinbeuger" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 104h96"/><path d="M36 104V74"/><path d="M62 70h18v20"/>
-    <rect x="18" y="30" width="9" height="40" rx="4.5" transform="rotate(-10 22 50)" style="fill:var(--pad)"/>
-    <rect x="22" y="66" width="40" height="8" rx="4" style="fill:var(--pad)"/>
-    <rect x="40" y="52" width="24" height="7" rx="3.5" style="fill:var(--pad)"/>
-    <circle cx="80" cy="92" r="6.5" style="fill:var(--pad)"/>
-    <rect x="94" y="48" width="13" height="44" rx="2.5"/><path d="M94 58h13M94 68h13M94 78h13"/></g></symbol>
-  <symbol id="m-deadbug" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="8" y="92" width="104" height="6" rx="3" stroke-width="0" style="fill:var(--pad)"/>
-    <circle cx="22" cy="80" r="6.5"/><path d="M29 82h34"/><path d="M36 82L40 56"/><path d="M33 82L14 66"/>
-    <path d="M63 82l6-22h18"/><path d="M63 84l38-6"/></g></symbol>
-  <symbol id="m-plank" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="8" y="92" width="104" height="6" rx="3" stroke-width="0" style="fill:var(--pad)"/>
-    <circle cx="24" cy="62" r="6.5"/><path d="M32 66L98 84"/><path d="M36 68v20h16"/><path d="M98 84l4 5"/></g></symbol>
+  <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C5D4C4"/><stop offset="1" stop-color="#97AE99"/></linearGradient>
+  <linearGradient id="padv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C5D4C4"/><stop offset="1" stop-color="#97AE99"/></linearGradient>
+  <linearGradient id="stack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3A403C"/><stop offset=".5" stop-color="#2A2F2C"/><stop offset="1" stop-color="#1E2220"/></linearGradient>
+  <g id="stackL"><rect x="0" y="0" width="22" height="80" rx="3" fill="url(#stack)"/><path d="M0 10h22M0 20h22M0 30h22M0 40h22M0 50h22M0 60h22M0 70h22" stroke="#4E5550" stroke-width="1"/></g>
+
+  <symbol id="m-latzug" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="108" cy="181" rx="78" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M36 177h134" stroke-width="8"/>
+    <path d="M142 177V30" stroke-width="9"/><path d="M142 31H68" stroke-width="8"/><path d="M142 31h28" stroke-width="8"/>
+    <path d="M152 38v56M166 38v56" stroke-width="3"/>
+    <circle cx="68" cy="36" r="5" fill="#2A2F2C" stroke="none"/><path d="M68 40v22" stroke-width="1.6"/>
+    <path d="M36 67q32-9 64 0" stroke-width="5"/>
+    <path d="M90 177v-62" stroke-width="8"/><path d="M90 160h52" stroke-width="6"/>
+    <rect x="62" y="104" width="56" height="12" rx="6" fill="url(#pad)" stroke="none"/>
+    <rect x="58" y="126" width="64" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="148" y="94"/></symbol>
+
+  <symbol id="m-brustpresse" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M24 177h140" stroke-width="8"/>
+    <path d="M62 177V24" stroke-width="9"/><path d="M28 28h34" stroke-width="7"/><path d="M30 34v58M42 34v58" stroke-width="3"/>
+    <path d="M62 30h36q28 0 34 40v8" stroke-width="7"/><path d="M132 66v34" stroke-width="6"/>
+    <rect x="127" y="72" width="10" height="22" rx="5" fill="url(#padv)" stroke="none"/>
+    <path d="M98 177v-38" stroke-width="8"/>
+    <rect x="68" y="52" width="15" height="74" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="68" y="128" width="62" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="25" y="94"/></symbol>
+
+  <symbol id="m-beinpresse" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="102" cy="181" rx="84" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M20 177h164" stroke-width="8"/>
+    <path d="M70 177v-34" stroke-width="8"/><path d="M98 150h60" stroke-width="6"/><path d="M160 177V74" stroke-width="8"/>
+    <path d="M84 128v-14h12" stroke-width="5"/>
+    <rect x="140" y="70" width="14" height="78" rx="5" fill="#3A403C" stroke="none"/>
+    <rect x="34" y="62" width="16" height="70" rx="8" transform="rotate(-18 42 132)" fill="url(#padv)" stroke="none"/>
+    <rect x="42" y="128" width="62" height="15" rx="7.5" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="168" y="94" transform="scale(.9) translate(18 10)"/></symbol>
+
+  <symbol id="m-rudern" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="84" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M18 177h160" stroke-width="8"/>
+    <path d="M58 177v-34" stroke-width="8"/><path d="M122 177v-46" stroke-width="7"/>
+    <path d="M152 177V28" stroke-width="9"/><path d="M152 40L106 88" stroke-width="7"/><path d="M104 78v24" stroke-width="6"/>
+    <rect x="114" y="74" width="15" height="58" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="28" y="130" width="62" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="158" y="94"/></symbol>
+
+  <symbol id="m-schulter" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="78" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M24 177h140" stroke-width="8"/>
+    <path d="M62 177V20" stroke-width="9"/><path d="M28 24h34" stroke-width="7"/><path d="M30 30v62M42 30v62" stroke-width="3"/>
+    <path d="M62 26h40q22 0 26 26" stroke-width="7"/><path d="M128 42v30" stroke-width="6"/>
+    <path d="M96 177v-36" stroke-width="8"/>
+    <rect x="68" y="40" width="15" height="86" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="68" y="128" width="58" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="25" y="94"/></symbol>
+
+  <symbol id="m-beinbeuger" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M20 177h150" stroke-width="8"/>
+    <path d="M74 177v-56" stroke-width="8"/><path d="M134 177V78" stroke-width="8"/><path d="M134 88h-30" stroke-width="6"/>
+    <path d="M128 120l8 40" stroke-width="7"/><circle cx="128" cy="120" r="6" fill="#2A2F2C" stroke="none"/>
+    <rect x="36" y="46" width="15" height="70" rx="7.5" transform="rotate(-10 44 116)" fill="url(#padv)" stroke="none"/>
+    <rect x="44" y="110" width="80" height="14" rx="7" fill="url(#pad)" stroke="none"/>
+    <rect x="86" y="92" width="38" height="11" rx="5.5" fill="url(#pad)" stroke="none"/>
+    <rect x="124" y="156" width="26" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="150" y="94"/></symbol>
+
+  <symbol id="m-deadbug" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="181" rx="86" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
+    <rect x="14" y="160" width="172" height="10" rx="5" fill="url(#pad)" stroke="none"/>
+    <circle cx="40" cy="138" r="11" fill="#2A2F2C" stroke="none"/>
+    <path d="M54 146h52" stroke-width="16"/>
+    <path d="M60 144l6-46" stroke-width="10"/><path d="M56 146L26 112" stroke-width="10"/>
+    <path d="M104 146l10-36h28" stroke-width="12"/><path d="M106 150l62-8" stroke-width="12"/></g></symbol>
+
+  <symbol id="m-plank" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="181" rx="86" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
+    <rect x="14" y="160" width="172" height="10" rx="5" fill="url(#pad)" stroke="none"/>
+    <circle cx="38" cy="108" r="11" fill="#2A2F2C" stroke="none"/>
+    <path d="M56 116L160 146" stroke-width="16"/><path d="M56 118v36h26" stroke-width="10"/><path d="M160 146l8 10" stroke-width="10"/></g></symbol>
+
   <symbol id="g-hantel" viewBox="0 0 24 24"><path d="M3 10v4M6 7.5v9M18 7.5v9M21 10v4M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="g-lauf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4.5" r="1.8"/><path d="M8 9.5l4-2 3 3 3 1"/><path d="M12 7.5l-2 6 4 3v4.5"/><path d="M10 13.5l-2.5 3.5H4"/></g></symbol>
 </defs>
 </svg>
 
 <div class="intro">
-  <div>
-    <small>Kraft · Designrichtung</small>
-    <h1>Lichtfeld</h1>
-  </div>
-  <p>Ruhige, warme Grundtöne. Weiche Farbfelder, die zeigen, wo man gerade ist, nie wie gut man ist. Grosse, leichte Typografie, eigene Geräte-Zeichnungen und Glas statt Boxen. Pro Bildschirm eine Sache.</p>
+  <div><small>Kraft · Designrichtung</small><h1>Ruhig. Klar. Eigenständig.</h1></div>
+  <p>Ein heller, sandfarbener Grund, weisse Flächen und ein tiefes Waldgrün für das Wesentliche. Weiche Farbverläufe gibt es nur dort, wo Ruhe zählt: beim Ankommen und in der Pause.</p>
 </div>
 
 <div class="row">
 
 <!-- 1 Heute -->
-<figure><small>Heute</small>
+<figure><span class="cap">Startseite</span>
 <div class="phone">
-  <div class="atmo"><i style="width:320px;height:300px;left:-90px;top:-60px;background:var(--salbei)"></i><i style="width:260px;height:240px;right:-90px;top:40px;background:var(--pfirsich)"></i><i style="width:220px;height:200px;left:110px;top:210px;background:var(--flieder);opacity:.7"></i></div>
+  <i class="glow" style="width:330px;height:280px;left:-120px;top:-80px;background:var(--salbei);opacity:.55"></i>
+  <i class="glow" style="width:260px;height:230px;right:-110px;top:30px;background:var(--pfirsich);opacity:.6"></i>
   <div class="island"></div>
   <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
   <div class="content">
-    <div class="kicker" style="margin-top:34px">Dienstag, 20. Oktober</div>
+    <div class="kicker" style="margin-top:44px">Dienstag, 20. Oktober</div>
     <div class="hero" style="margin-top:12px">Guten Tag.</div>
-
     <div style="flex:1"></div>
 
-    <div style="background:var(--moos);color:#F4F2EC;border-radius:34px;padding:24px 22px 22px;position:relative;overflow:hidden;box-shadow:0 30px 50px -30px rgba(47,74,63,.8)">
-      <i style="position:absolute;width:220px;height:220px;right:-80px;top:-90px;border-radius:50%;background:#6E8F7E;filter:blur(40px);opacity:.8"></i>
-      <svg style="width:30px;height:30px;position:relative;color:#DCE6DD"><use href="#g-hantel"/></svg>
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:34px;position:relative">
-        <div><div style="font-family:var(--display);font-size:28px;letter-spacing:-.03em">Krafttraining</div>
-          <div style="font-size:14px;opacity:.72;margin-top:4px">Aufwärmen · Geräte · Cool-down</div></div>
-        <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    <div style="background:var(--wald);color:#F3F1EC;border-radius:28px;padding:22px 20px 20px">
+      <svg style="width:28px;height:28px;color:#DCE5DB"><use href="#g-hantel"/></svg>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:30px">
+        <div><div style="font-family:var(--display);font-size:24px;letter-spacing:-.025em">Krafttraining</div>
+          <div style="font-size:13.5px;opacity:.7;margin-top:4px">Aufwärmen · Geräte · Cool-down</div></div>
+        <span style="width:42px;height:42px;border-radius:50%;background:#F3F1EC;color:var(--wald);display:flex;align-items:center;justify-content:center"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
     </div>
 
-    <div class="glass" style="border-radius:28px;padding:18px 20px;margin-top:12px;display:flex;align-items:center;gap:14px">
-      <svg style="width:26px;height:26px;color:var(--tinte)"><use href="#g-lauf"/></svg>
-      <div style="flex:1"><div style="font-size:17px;font-weight:600;letter-spacing:-.015em">Long Run</div><div style="font-size:13.5px;color:var(--tinte-2)">Aus Strava übernehmen</div></div>
-      <svg class="ico" viewBox="0 0 24 24" style="color:var(--tinte-3)"><path d="M9 6l6 6-6 6"/></svg>
+    <div class="tile" style="padding:18px 20px;margin-top:10px;display:flex;align-items:center;gap:14px">
+      <span style="width:40px;height:40px;border-radius:12px;background:var(--stein);display:flex;align-items:center;justify-content:center"><svg style="width:22px;height:22px"><use href="#g-lauf"/></svg></span>
+      <div style="flex:1"><div style="font-size:16px;font-weight:600;letter-spacing:-.015em">Long Run</div><div class="sub">Aus Strava übernehmen</div></div>
+      <svg class="ico" viewBox="0 0 24 24" style="color:var(--grau-2)"><path d="M9 6l6 6-6 6"/></svg>
     </div>
-
-    <div style="margin:22px 0 118px;display:flex;justify-content:space-between;font-size:13.5px;color:var(--tinte-2)"><span>Zuletzt: Krafttraining</span><span>Samstag</span></div>
+    <div style="height:110px"></div>
   </div>
-  <div class="tabs glass">
+  <div class="tabs">
     <div class="tab on"><svg viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5V20h-5v-5h-6v5H4z"/></svg>Heute</div>
     <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 20v-8M12 20V5M19 20v-5"/></svg>Verlauf</div>
     <div class="tab"><svg viewBox="0 0 24 24"><use href="#g-hantel"/></svg>Geräte</div>
@@ -260,143 +287,138 @@ figcaption{font-size:13.5px;line-height:1.5;color:var(--tinte-2);max-width:300px
   </div>
   <div class="homebar"></div>
 </div>
-<figcaption>Eine Begrüssung, zwei Wege. Die Farbfelder bewegen sich kaum merklich. Kein Zähler, kein Ansporn.</figcaption>
+<figcaption>Ein weicher Verlauf nur oben, beim Ankommen. Darunter zwei klare Wege.</figcaption>
 </figure>
 
 <!-- 2 Geräte -->
-<figure><small>Geräteübersicht</small>
+<figure><span class="cap">Geräteübersicht</span>
 <div class="phone">
-  <div class="atmo"><i style="width:300px;height:220px;left:-60px;top:-90px;background:var(--salbei);opacity:.75"></i><i style="width:240px;height:200px;right:-100px;top:-40px;background:var(--flieder);opacity:.8"></i></div>
   <div class="island"></div>
   <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
   <div class="content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:14px">
-      <span class="num" style="color:var(--tinte-2)">Krafttraining · 23 Min.</span><span style="font-weight:600">Beenden</span></div>
-    <div class="h1" style="margin-top:22px">Als Nächstes</div>
-    <div class="meta">Wähle, was gerade frei ist.</div>
+    <div class="nav"><span class="num" style="font-size:13.5px;color:var(--grau)">Krafttraining · 23 Min.</span><span style="font-size:14px;font-weight:600">Beenden</span></div>
+    <div class="h1" style="margin-top:8px">Geräte</div>
 
-    <div style="margin-top:14px">
-      <div class="dev"><div class="thumb t-ruecken" style="width:84px;height:84px"><svg><use href="#m-latzug"/></svg></div><div class="tx"><b>Latzug</b><span>Rücken · Bizeps</span><em class="num">2 × 8–12 · 42,5 kg</em></div></div>
-      <div class="dev"><div class="thumb t-bein" style="width:84px;height:84px"><svg><use href="#m-beinbeuger"/></svg></div><div class="tx"><b>Beinbeuger</b><span>Oberschenkel hinten</span><em class="num">2 × 8–12 · 30 kg</em></div></div>
-      <div class="dev"><div class="thumb t-rumpf" style="width:84px;height:84px"><svg><use href="#m-deadbug"/></svg></div><div class="tx"><b>Dead Bug</b><span>Rumpf · Matte</span><em class="num">2 × 8–12 pro Seite</em></div></div>
-    </div>
+    <div class="label" style="margin-top:20px">Empfohlen</div>
+    <div class="tile item"><div class="pic" style="width:72px;height:72px"><svg><use href="#m-latzug"/></svg></div><div class="tx"><b>Latzug</b><div class="sub">Rücken · Bizeps</div><div class="val num">2 × 8–12 · 42,5 kg</div></div><span class="rec-n">1</span></div>
+    <div class="tile item"><div class="pic" style="width:72px;height:72px"><svg><use href="#m-beinbeuger"/></svg></div><div class="tx"><b>Beinbeuger</b><div class="sub">Oberschenkel hinten</div><div class="val num">2 × 8–12 · 30 kg</div></div><span class="rec-n">2</span></div>
+    <div class="tile item"><div class="pic" style="width:72px;height:72px"><svg><use href="#m-deadbug"/></svg></div><div class="tx"><b>Dead Bug</b><div class="sub">Rumpf · Matte</div><div class="val num">2 × 8–12 pro Seite</div></div><span class="rec-n">3</span></div>
 
-    <div class="label" style="margin-top:20px">Alle Geräte</div>
+    <div class="label" style="margin-top:22px">Alle Geräte</div>
     <div style="margin-top:4px">
-      <div class="dev" style="padding:7px 0"><div class="thumb t-brust" style="width:46px;height:46px;border-radius:15px"><svg><use href="#m-schulter"/></svg></div><div class="tx"><b style="font-size:15.5px">Schulterpresse</b></div><div class="pips"><i></i><i></i></div></div>
-      <div class="dev" style="padding:7px 0"><div class="thumb t-ruecken" style="width:46px;height:46px;border-radius:15px"><svg><use href="#m-rudern"/></svg></div><div class="tx"><b style="font-size:15.5px">Rudern sitzend</b></div><div class="pips"><i class="f"></i><i></i></div></div>
-      <div class="dev done" style="padding:7px 0"><div class="thumb t-bein" style="width:46px;height:46px;border-radius:15px"><svg><use href="#m-beinpresse"/></svg></div><div class="tx"><b style="font-size:15.5px">Beinpresse</b></div><div class="pips"><i class="f"></i><i class="f"></i></div></div>
+      <div class="mini"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-schulter"/></svg></div><b>Schulterpresse</b><div class="pips"><i></i><i></i></div></div>
+      <div class="mini"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-rudern"/></svg></div><b>Rudern sitzend</b><div class="pips"><i class="f"></i><i></i></div></div>
+      <div class="mini done"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-beinpresse"/></svg></div><b>Beinpresse</b><div class="pips"><i class="f"></i><i class="f"></i></div></div>
     </div>
   </div>
   <div class="homebar"></div>
 </div>
-<figcaption>Drei Empfehlungen, gross und mit Zeichnung. Darunter alles andere, ruhig und klein. Die Farbe des Felds zeigt die Körperregion.</figcaption>
+<figcaption>Drei Empfehlungen als Karten mit Bild und heutigem Vorschlag. Darunter alle anderen, schlicht. Die Punkte zeigen erledigte Sätze.</figcaption>
 </figure>
 
-<!-- 3 Gerät -->
-<figure><small>Gerät und Satz</small>
+<!-- 3 Gerätedetail -->
+<figure><span class="cap">Gerätedetail</span>
 <div class="phone">
-  <div class="atmo"><i style="width:340px;height:300px;left:30px;top:-40px;background:var(--nebel)"></i><i style="width:200px;height:180px;left:-60px;top:120px;background:var(--flieder);opacity:.6"></i></div>
   <div class="island"></div>
   <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
   <div class="content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-      <span class="glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span>
-      <span class="glass" style="height:40px;border-radius:20px;padding:0 16px;display:flex;align-items:center;font-size:14px;font-weight:500">Anleitung</span></div>
-    <svg style="width:180px;height:180px;margin:-6px auto 0;display:block;color:var(--tinte)"><use href="#m-latzug"/></svg>
-    <div class="h1" style="margin-top:-4px">Latzug</div>
-    <div class="meta">Rücken · Bizeps · vertikal ziehen</div>
+    <div class="nav"><span class="round"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span><span class="round"><svg class="ico" viewBox="0 0 24 24"><circle cx="5" cy="12" r=".8"/><circle cx="12" cy="12" r=".8"/><circle cx="19" cy="12" r=".8"/></svg></span></div>
+    <div class="halo"><svg><use href="#m-latzug"/></svg></div>
+    <div class="h1">Latzug</div>
+    <div class="sub" style="font-size:14px">Rücken · Bizeps · vertikal ziehen</div>
+    <div class="segl"><span class="on">Übersicht</span><span>Anleitung</span><span>Verlauf</span></div>
 
-    <div class="settings">
-      <div><small>Sitzhöhe</small><b>4</b></div>
-      <div><small>Beinpolster</small><b>3</b></div>
-      <div><small>Griff</small><b>breit</b></div>
-    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px"><span class="label">Deine Einstellungen</span><span class="edit">Bearbeiten</span></div>
+    <div class="grid3" style="margin-top:8px"><div><small>Sitzhöhe</small><b>4</b></div><div><small>Beinpolster</small><b>3</b></div><div><small>Griff</small><b>breit</b></div></div>
 
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:24px">
-      <span class="label">Satz 1 von 2</span><span class="num" style="font-size:13px;color:var(--tinte-2)">Zuletzt 2 × 10 · 40 kg</span></div>
-    <div class="dual glass">
-      <div class="c"><div class="v num">42,5</div><div class="u">Kilogramm</div><div class="pm"><span><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg></span></div></div>
-      <div class="sep"></div>
-      <div class="c"><div class="v num">10</div><div class="u">Wiederholungen</div><div class="pm"><span><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg></span></div></div>
-    </div>
+    <div class="label" style="margin-top:16px">Für heute</div>
+    <div class="grid3" style="margin-top:8px"><div><small>Sätze</small><b>2</b></div><div><small>Wiederh.</small><b>8–12</b></div><div><small>Gewicht</small><b class="num">42,5</b></div></div>
+
     <div style="flex:1"></div>
-    <div class="cta" style="margin-bottom:40px">Satz abschliessen</div>
+    <div class="cta" style="margin-bottom:38px">Los geht’s</div>
   </div>
   <div class="homebar"></div>
 </div>
-<figcaption>Zeichnung, Name, deine Einstellungen. Darunter die Werte für heute, schon eingetragen. Ein Tipp schliesst den Satz ab.</figcaption>
+<figcaption>Das Gerät, deine Einstellungen und der Vorschlag für heute auf einen Blick. Anleitung und Verlauf liegen gleich daneben.</figcaption>
 </figure>
 
-<!-- 4 Pause -->
-<figure><small>Pause</small>
-<div class="phone" style="background:#F3E6DD">
-  <div class="atmo"><i style="width:380px;height:380px;left:-120px;top:-60px;background:var(--pfirsich)"></i><i style="width:340px;height:320px;right:-140px;top:180px;background:var(--salbei)"></i><i style="width:300px;height:280px;left:-60px;bottom:-80px;background:var(--flieder)"></i></div>
+<!-- 4 Satz -->
+<figure><span class="cap">Satzprotokoll</span>
+<div class="phone">
   <div class="island"></div>
   <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
   <div class="content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:14px">
-      <span style="color:var(--tinte-2)">Latzug · Satz 1 gespeichert</span>
-      <svg class="ico" viewBox="0 0 24 24"><path d="M5 9.5h3l4-3.5v12l-4-3.5H5z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/></svg></div>
-    <div class="timer">
-      <svg class="r" viewBox="0 0 264 264"><circle cx="132" cy="132" r="128" fill="none" stroke="rgba(29,33,31,.08)" stroke-width="2"/><circle cx="132" cy="132" r="128" fill="none" stroke="var(--tinte)" stroke-width="2" stroke-linecap="round" stroke-dasharray="804" stroke-dashoffset="290"/></svg>
-      <div style="text-align:center"><div class="v num">1:12</div><div style="font-size:13px;color:var(--tinte-2);margin-top:-2px">von 2:00</div></div>
-    </div>
-    <div class="ctrl">
-      <span class="glass num">−15</span>
-      <span class="glass" style="width:62px;height:62px"><svg class="ico" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M9 6v12M15 6v12"/></svg></span>
-      <span class="glass num">+15</span>
-    </div>
+    <div class="nav"><span class="round"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></span><span style="font-size:15px;font-weight:600">Latzug</span><span style="width:38px"></span></div>
+    <div class="h1" style="margin-top:18px">Satz 2 <span style="color:var(--grau-2)">von 2</span></div>
+
+    <div class="tile stepper"><span class="pm"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span><div class="v"><b class="num">42,5</b><small>Kilogramm</small></div><span class="pm"><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg></span></div>
+    <div class="tile stepper" style="margin-top:10px"><span class="pm"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span><div class="v"><b class="num">10</b><small>Wiederholungen</small></div><span class="pm"><svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg></span></div>
+
+    <div class="label" style="margin-top:24px">Heute</div>
+    <div class="setlog num"><span>Satz 1</span><span>42,5 kg · 11 Wdh. · Passend</span></div>
+
     <div style="flex:1"></div>
-    <div style="font-size:14.5px;text-align:center;color:var(--tinte-2)">Wie war der Satz?</div>
+    <div class="cta" style="margin-bottom:38px">Satz speichern</div>
+  </div>
+  <div class="homebar"></div>
+</div>
+<figcaption>Gewicht und Wiederholungen sind vorausgefüllt. Ein Tipp speichert. Was du heute schon gemacht hast, steht darunter.</figcaption>
+</figure>
+
+<!-- 5 Pause -->
+<figure><span class="cap">Pausentimer</span>
+<div class="phone" style="background:linear-gradient(170deg,#E3E9E0 0%,#EFE3DA 55%,#E7E2EE 100%)">
+  <i class="glow" style="width:300px;height:280px;left:-110px;top:110px;background:var(--salbei);opacity:.45"></i>
+  <i class="glow" style="width:280px;height:260px;right:-120px;top:320px;background:var(--pfirsich);opacity:.55"></i>
+  <div class="island"></div>
+  <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
+  <div class="content">
+    <div class="nav"><span style="font-size:13.5px;color:var(--grau)">Latzug · Satz 1 gespeichert</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 9.5h3l4-3.5v12l-4-3.5H5z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/></svg></div>
+    <div class="timer">
+      <svg viewBox="0 0 250 250"><circle cx="125" cy="125" r="120" fill="none" stroke="rgba(31,36,33,.1)" stroke-width="3"/><circle cx="125" cy="125" r="120" fill="none" stroke="var(--wald)" stroke-width="3" stroke-linecap="round" stroke-dasharray="754" stroke-dashoffset="272"/></svg>
+      <div style="text-align:center"><b class="num">1:12</b><div style="font-size:13px;color:var(--grau);margin-top:-4px">Pause</div></div>
+    </div>
+    <div class="ctrl"><span class="num">−15</span><span class="big"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg></span><span class="num">+15</span></div>
+    <div style="flex:1"></div>
+    <div style="font-size:14px;text-align:center;color:var(--grau)">Wie fühlte sich der Satz an?</div>
     <div class="feel">
       <div><span class="lv l1"><i></i><i></i><i></i></span>Leicht</div>
       <div class="on"><span class="lv l2"><i></i><i></i><i></i></span>Passend</div>
       <div><span class="lv l3"><i></i><i></i><i></i></span>Sehr streng</div>
     </div>
-    <div class="cta" style="margin:16px 0 40px">Weiter zu Satz 2<span class="arrow" style="width:30px;height:30px;background:none"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    <div class="cta" style="margin:14px 0 38px;background:var(--anthrazit)">Weiter zu Satz 2</div>
   </div>
   <div class="homebar"></div>
 </div>
-<figcaption>Das Farbfeld atmet. Ein Knopf: Er beendet die Pause, egal ob sie abgelaufen ist. Die Rückmeldung ist optional und bezieht sich auf den Satz, der eben war.</figcaption>
+<figcaption>Der einzige Bildschirm mit vollem Farbverlauf. Ein Knopf beendet die Pause. Die Rückmeldung gilt dem Satz, der eben war.</figcaption>
 </figure>
 
-<!-- 5 Verlauf -->
-<figure><small>Verlauf</small>
+<!-- 6 Verlauf -->
+<figure><span class="cap">Verlauf</span>
 <div class="phone">
-  <div class="atmo"><i style="width:300px;height:220px;right:-90px;top:-80px;background:var(--nebel)"></i><i style="width:220px;height:180px;left:-80px;top:-20px;background:var(--pfirsich);opacity:.6"></i></div>
   <div class="island"></div>
   <div class="status"><span class="num">9:41</span><svg viewBox="0 0 64 12"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="22" height="10" rx="3" fill="none" stroke="currentColor"/><rect x="40" y="3" width="16" height="6" rx="1.5"/></svg></div>
   <div class="content">
     <div class="h1" style="margin-top:30px">Verlauf</div>
-    <div class="seg glass"><div class="on">Alles</div><div>Gym</div><div>Long Run</div></div>
-
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:26px">
-      <span style="font-size:17px;font-weight:600;letter-spacing:-.015em">Oktober</span>
-      <span style="display:flex;gap:14px;font-size:12px;color:var(--tinte-2);align-items:center"><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--moos);margin-right:5px"></i>Gym</span><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8AA6C6;margin-right:5px"></i>Long Run</span></span></div>
-    <div class="cal">
-      <small>M</small><small>D</small><small>M</small><small>D</small><small>F</small><small>S</small><small>S</small>
-      <i class="x"></i><i class="x"></i><i></i><i></i><i></i><i class="g"></i><i></i>
-      <i></i><i class="g"></i><i></i><i></i><i></i><i></i><i class="r"></i>
-      <i></i><i></i><i class="g"></i><i></i><i></i><i></i><i class="r"></i>
-      <i></i><i></i><i></i><i></i><i></i><i class="g"></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    <div class="seg"><div class="on">Gym</div><div>Long Run</div></div>
+    <div class="tile" style="padding:16px 16px 14px;margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px;font-weight:600">Oktober 2026</span><svg class="ico" viewBox="0 0 24 24" style="color:var(--grau)"><path d="M9 6l6 6-6 6"/></svg></div>
+      <div class="cal">
+        <small>M</small><small>D</small><small>M</small><small>D</small><small>F</small><small>S</small><small>S</small>
+        <i class="x"></i><i class="x"></i><i class="x"></i><i></i><i></i><i class="g"></i><i></i>
+        <i></i><i class="g"></i><i></i><i></i><i></i><i></i><i class="r"></i>
+        <i></i><i></i><i class="g"></i><i></i><i></i><i></i><i class="r"></i>
+        <i></i><i></i><i></i><i></i><i></i><i class="g"></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
     </div>
-
-    <div class="facts">
-      <div><b class="num">24</b><small>Gym-Besuche insgesamt</small></div>
-      <div><b class="num">4</b><small>im Oktober</small></div>
-    </div>
-
-    <div style="margin-top:14px">
-      <div class="log"><span class="g" style="background:rgba(169,188,169,.35)"><svg><use href="#g-hantel"/></svg></span><div class="tx"><b>Krafttraining</b><span>7 Übungen · 52 Min.</span></div><em>Sa, 17.</em></div>
-      <div class="hair"></div>
-      <div class="log"><span class="g" style="background:rgba(198,213,230,.6)"><svg><use href="#g-lauf"/></svg></span><div class="tx"><b>Long Run</b><span class="num">14,2 km · 1:38 Std.</span></div><em>So, 11.</em></div>
-      <div class="hair"></div>
-      <div class="log"><span class="g" style="background:rgba(169,188,169,.35)"><svg><use href="#g-hantel"/></svg></span><div class="tx"><b>Krafttraining</b><span>6 Übungen · 48 Min.</span></div><em>Mi, 7.</em></div>
+    <div style="margin-top:12px">
+      <div class="log"><span class="g"><svg><use href="#g-hantel"/></svg></span><div class="tx"><b>Krafttraining</b><span>7 Übungen · 52 Min.</span></div><em>Sa, 17. Okt.</em></div>
+      <div class="log"><span class="g"><svg><use href="#g-lauf"/></svg></span><div class="tx"><b>Long Run</b><span class="num">14,2 km · 1:38 Std.</span></div><em>So, 11. Okt.</em></div>
+      <div class="log"><span class="g"><svg><use href="#g-hantel"/></svg></span><div class="tx"><b>Krafttraining</b><span>6 Übungen · 48 Min.</span></div><em>Mi, 7. Okt.</em></div>
     </div>
   </div>
-  <div class="tabs glass">
+  <div class="tabs">
     <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5V20h-5v-5h-6v5H4z"/></svg>Heute</div>
     <div class="tab on"><svg viewBox="0 0 24 24"><path d="M5 20v-8M12 20V5M19 20v-5"/></svg>Verlauf</div>
     <div class="tab"><svg viewBox="0 0 24 24"><use href="#g-hantel"/></svg>Geräte</div>
@@ -404,40 +426,35 @@ figcaption{font-size:13.5px;line-height:1.5;color:var(--tinte-2);max-width:300px
   </div>
   <div class="homebar"></div>
 </div>
-<figcaption>Was stattgefunden hat, sonst nichts. Punkte statt Balken, keine leeren Tage in Warnfarbe, keine Ziele.</figcaption>
+<figcaption>Trainingstage als Punkte im Kalender, darunter die Einheiten. Keine Ziele, keine Warnfarben.</figcaption>
 </figure>
 
 </div>
 
-<div class="system">
+<div class="sys">
   <div>
-    <h3>Farbwelt</h3>
+    <h3>Farbpalette</h3>
     <div class="sw">
-      <div><i style="background:var(--kreide)"></i><b>Kreide</b><span>#F5F2EC</span></div>
-      <div><i style="background:var(--salbei)"></i><b>Salbei</b><span>#A9BCA9</span></div>
-      <div><i style="background:var(--pfirsich)"></i><b>Pfirsich</b><span>#F1CDBB</span></div>
-      <div><i style="background:var(--flieder)"></i><b>Flieder</b><span>#D6D0EA</span></div>
-      <div><i style="background:var(--nebel)"></i><b>Nebel</b><span>#C6D5E6</span></div>
-      <div><i style="background:var(--moos)"></i><b>Moos</b><span>#2F4A3F</span></div>
-      <div><i style="background:var(--tinte)"></i><b>Tinte</b><span>#1D211F</span></div>
-    </div>
-    <div class="fields">
-      <i style="background:radial-gradient(circle at 30% 30%,var(--salbei),transparent 70%),radial-gradient(circle at 80% 70%,var(--pfirsich),transparent 65%),var(--kreide)"></i>
-      <i style="background:radial-gradient(circle at 25% 30%,var(--pfirsich),transparent 70%),radial-gradient(circle at 75% 75%,var(--flieder),transparent 65%),var(--kreide)"></i>
-      <i style="background:radial-gradient(circle at 70% 30%,var(--nebel),transparent 70%),radial-gradient(circle at 25% 80%,var(--flieder),transparent 65%),var(--kreide)"></i>
+      <div><i style="background:var(--sand)"></i><b>Sand</b><span>#F5F3EE</span></div>
+      <div><i style="background:var(--salbei)"></i><b>Salbei</b><span>#A3B8A5</span></div>
+      <div><i style="background:var(--pfirsich)"></i><b>Pfirsich</b><span>#F2D6C8</span></div>
+      <div><i style="background:var(--flieder)"></i><b>Flieder</b><span>#DCD5EA</span></div>
+      <div><i style="background:var(--blau)"></i><b>Blau</b><span>#C9D8EA</span></div>
+      <div><i style="background:var(--wald)"></i><b>Waldgrün</b><span>#304C3F</span></div>
+      <div><i style="background:var(--anthrazit)"></i><b>Anthrazit</b><span>#1F2421</span></div>
     </div>
   </div>
   <div class="typo">
     <h3>Typografie</h3>
     <div class="a">Guten Tag.</div>
-    <p><b style="color:var(--tinte)">Instrument Sans</b> für Titel und grosse Zahlen: eine schlanke, ruhige Grotesk ohne Serifen, gross und leicht gesetzt. Für alles Kleine die iOS-Systemschrift, damit sich die App nativ anfühlt. Die Schrift wird mit der App ausgeliefert, nicht von Google geladen.</p>
+    <p><b>Instrument Sans</b> für Titel und grosse Zahlen, ruhig und ohne Serifen. Für Texte und Bedienelemente die iOS-Systemschrift. Die Schrift wird mit der App ausgeliefert.</p>
   </div>
-  <div class="princ">
+  <div>
     <h3>Prinzipien</h3>
-    <p><b>Farbe zeigt Ort, nie Leistung.</b> Jede Phase hat ihr Lichtfeld (Salbei für den Anfang, Pfirsich für die Pause, Nebel für Rücken und Verlauf). Es gibt kein Rot und kein Grün für gut oder schlecht.</p>
-    <p><b>Glas statt Boxen.</b> Wenige, halbtransparente Flächen über den Farbfeldern statt Kartenraster.</p>
-    <p><b>Eigene Zeichnungen.</b> Jedes Gerät hat eine schlichte Linienzeichnung im gleichen Strich. Die Polster tragen die Akzentfarbe.</p>
-    <p><b>Ein Daumen, ein Knopf.</b> Die Hauptaktion liegt immer unten und ist gross.</p>
+    <p><b>Verläufe sparsam.</b> Nur beim Ankommen und in der Pause, sonst ein ruhiger Sandgrund.</p>
+    <p><b>Weisse Flächen, weiche Schatten.</b> Karten nur dort, wo sie etwas zusammenhalten.</p>
+    <p><b>Geräte als Bild.</b> Flächige Darstellungen in Anthrazit, Polster in Salbei.</p>
+    <p><b>Ein Knopf, unten.</b> Die Hauptaktion ist immer gross und mit dem Daumen erreichbar.</p>
   </div>
 </div>
 
