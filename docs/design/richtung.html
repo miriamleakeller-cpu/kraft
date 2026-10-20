@@ -225,20 +225,36 @@ figcaption{font-size:13.5px;line-height:1.5;color:var(--grau);max-width:310px;pa
     <rect x="124" y="156" width="26" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
     <use href="#stackL" x="150" y="94"/></symbol>
 
-  <symbol id="m-deadbug" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <ellipse cx="100" cy="181" rx="86" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
-    <rect x="14" y="160" width="172" height="10" rx="5" fill="url(#pad)" stroke="none"/>
-    <circle cx="40" cy="138" r="11" fill="#2A2F2C" stroke="none"/>
-    <path d="M54 146h52" stroke-width="16"/>
-    <path d="M60 144l6-46" stroke-width="10"/><path d="M56 146L26 112" stroke-width="10"/>
-    <path d="M104 146l10-36h28" stroke-width="12"/><path d="M106 150l62-8" stroke-width="12"/></g></symbol>
+  <!-- Figuren: weiche, gerundete Körperformen; abgewandte Gliedmassen heller für Tiefe -->
+  <symbol id="m-deadbug" viewBox="0 0 200 200"><g stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="178" rx="88" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
+    <rect x="10" y="160" width="180" height="9" rx="4.5" fill="url(#pad)" stroke="none"/>
+    <!-- hinten -->
+    <g stroke="#8E9A92"><path d="M54 146L24 132" stroke-width="12"/><path d="M24 132l-10-4" stroke-width="10"/>
+      <path d="M106 150L142 146" stroke-width="15"/><path d="M142 146L176 141" stroke-width="11"/><path d="M176 141l7-5" stroke-width="7"/></g>
+    <!-- vorne -->
+    <g stroke="#2E3531">
+      <path d="M50 149H104" stroke-width="25"/>
+      <path d="M44 148l-6-1" stroke-width="9"/>
+      <path d="M58 144L60 112" stroke-width="13"/><path d="M60 112L62 86" stroke-width="11"/>
+      <path d="M104 146L112 112" stroke-width="16"/><path d="M112 112H144" stroke-width="11"/><path d="M144 112l4 -7" stroke-width="7"/>
+    </g>
+    <circle cx="30" cy="146" r="11" fill="#2E3531"/></g></symbol>
 
-  <symbol id="m-plank" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <ellipse cx="100" cy="181" rx="86" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
-    <rect x="14" y="160" width="172" height="10" rx="5" fill="url(#pad)" stroke="none"/>
-    <circle cx="38" cy="108" r="11" fill="#2A2F2C" stroke="none"/>
-    <path d="M56 116L160 146" stroke-width="16"/><path d="M56 118v36h26" stroke-width="10"/><path d="M160 146l8 10" stroke-width="10"/></g></symbol>
-
+  <symbol id="m-plank" viewBox="0 0 200 200"><g stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="178" rx="88" ry="5" fill="#000" fill-opacity=".06" stroke="none"/>
+    <rect x="10" y="160" width="180" height="9" rx="4.5" fill="url(#pad)" stroke="none"/>
+    <!-- hinten -->
+    <g stroke="#8E9A92"><path d="M62 124V152" stroke-width="10"/><path d="M62 154h24" stroke-width="8"/>
+      <path d="M126 136L156 146" stroke-width="13"/><path d="M156 146L178 152" stroke-width="10"/></g>
+    <!-- vorne -->
+    <g stroke="#2E3531">
+      <path d="M58 120L124 136" stroke-width="24"/>
+      <path d="M54 124V153" stroke-width="11"/><path d="M54 154h26" stroke-width="9"/>
+      <path d="M124 138L154 148" stroke-width="15"/><path d="M154 148L178 155" stroke-width="11"/><path d="M178 155l3 1" stroke-width="7"/>
+      <path d="M46 118l-6 0" stroke-width="10"/>
+    </g>
+    <circle cx="34" cy="118" r="11" fill="#2E3531"/></g></symbol>
   <symbol id="g-hantel" viewBox="0 0 24 24"><path d="M3 10v4M6 7.5v9M18 7.5v9M21 10v4M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="g-lauf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4.5" r="1.8"/><path d="M8 9.5l4-2 3 3 3 1"/><path d="M12 7.5l-2 6 4 3v4.5"/><path d="M10 13.5l-2.5 3.5H4"/></g></symbol>
 </defs>
@@ -308,6 +324,7 @@ figcaption{font-size:13.5px;line-height:1.5;color:var(--grau);max-width:310px;pa
     <div style="margin-top:4px">
       <div class="mini"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-schulter"/></svg></div><b>Schulterpresse</b><div class="pips"><i></i><i></i></div></div>
       <div class="mini"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-rudern"/></svg></div><b>Rudern sitzend</b><div class="pips"><i class="f"></i><i></i></div></div>
+      <div class="mini"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-plank"/></svg></div><b>Unterarmstütz</b><div class="pips"><i></i><i></i></div></div>
       <div class="mini done"><div class="pic" style="width:44px;height:44px;border-radius:13px"><svg><use href="#m-beinpresse"/></svg></div><b>Beinpresse</b><div class="pips"><i class="f"></i><i class="f"></i></div></div>
     </div>
   </div>
