@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C5D4C4"/><stop offset="1" stop-color="#97AE99"/></linearGradient>
+  <linearGradient id="padv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C5D4C4"/><stop offset="1" stop-color="#97AE99"/></linearGradient>
+  <linearGradient id="stack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3A403C"/><stop offset=".5" stop-color="#2A2F2C"/><stop offset="1" stop-color="#1E2220"/></linearGradient>
+  <g id="stackL"><rect x="0" y="0" width="22" height="80" rx="3" fill="url(#stack)"/><path d="M0 10h22M0 20h22M0 30h22M0 40h22M0 50h22M0 60h22M0 70h22" stroke="#4E5550" stroke-width="1"/></g>
+  <symbol id="m-latzug" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="108" cy="181" rx="78" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M36 177h134" stroke-width="8"/>
+    <path d="M142 177V30" stroke-width="9"/><path d="M142 31H68" stroke-width="8"/><path d="M142 31h28" stroke-width="8"/>
+    <path d="M152 38v56M166 38v56" stroke-width="3"/>
+    <circle cx="68" cy="36" r="5" fill="#2A2F2C" stroke="none"/><path d="M68 40v22" stroke-width="1.6"/>
+    <path d="M36 67q32-9 64 0" stroke-width="5"/>
+    <path d="M90 177v-62" stroke-width="8"/><path d="M90 160h52" stroke-width="6"/>
+    <rect x="62" y="104" width="56" height="12" rx="6" fill="url(#pad)" stroke="none"/>
+    <rect x="58" y="126" width="64" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="148" y="94"/></symbol>
+  <symbol id="m-brustpresse" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M24 177h140" stroke-width="8"/>
+    <path d="M62 177V24" stroke-width="9"/><path d="M28 28h34" stroke-width="7"/><path d="M30 34v58M42 34v58" stroke-width="3"/>
+    <path d="M62 92h72" stroke-width="7"/><path d="M134 76v32" stroke-width="6"/>
+    <rect x="129" y="81" width="10" height="22" rx="5" fill="url(#padv)" stroke="none"/>
+    <path d="M98 177v-38" stroke-width="8"/>
+    <rect x="68" y="52" width="15" height="74" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="68" y="128" width="62" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="25" y="94"/></symbol>
+  <symbol id="m-beinpresse" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="102" cy="181" rx="84" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M20 177h164" stroke-width="8"/>
+    <path d="M70 177v-34" stroke-width="8"/><path d="M98 150h60" stroke-width="6"/><path d="M160 177V74" stroke-width="8"/>
+    <path d="M84 128v-14h12" stroke-width="5"/>
+    <rect x="140" y="70" width="14" height="78" rx="5" fill="#3A403C" stroke="none"/>
+    <rect x="34" y="62" width="16" height="70" rx="8" transform="rotate(-18 42 132)" fill="url(#padv)" stroke="none"/>
+    <rect x="42" y="128" width="62" height="15" rx="7.5" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="168" y="94" transform="scale(.9) translate(18 10)"/></symbol>
+  <symbol id="m-rudern" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="84" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M18 177h160" stroke-width="8"/>
+    <path d="M58 177v-34" stroke-width="8"/><path d="M122 177v-46" stroke-width="7"/>
+    <path d="M152 177V28" stroke-width="9"/><path d="M152 40L106 88" stroke-width="7"/><path d="M104 78v24" stroke-width="6"/>
+    <rect x="114" y="74" width="15" height="58" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="28" y="130" width="62" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="158" y="94"/></symbol>
+  <symbol id="m-schulter" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="78" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M24 177h140" stroke-width="8"/>
+    <path d="M62 177V20" stroke-width="9"/><path d="M28 24h34" stroke-width="7"/><path d="M30 30v62M42 30v62" stroke-width="3"/>
+    <path d="M62 26h40q22 0 26 26" stroke-width="7"/><path d="M128 42v30" stroke-width="6"/>
+    <path d="M96 177v-36" stroke-width="8"/>
+    <rect x="68" y="40" width="15" height="86" rx="7.5" fill="url(#padv)" stroke="none"/>
+    <rect x="68" y="128" width="58" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="25" y="94"/></symbol>
+  <symbol id="m-beinbeuger" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" fill="none">
+    <ellipse cx="100" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M20 177h150" stroke-width="8"/>
+    <path d="M74 177v-56" stroke-width="8"/><path d="M134 177V78" stroke-width="8"/><path d="M134 88h-30" stroke-width="6"/>
+    <path d="M128 120l8 40" stroke-width="7"/><circle cx="128" cy="120" r="6" fill="#2A2F2C" stroke="none"/>
+    <rect x="36" y="46" width="15" height="70" rx="7.5" transform="rotate(-10 44 116)" fill="url(#padv)" stroke="none"/>
+    <rect x="44" y="110" width="80" height="14" rx="7" fill="url(#pad)" stroke="none"/>
+    <rect x="86" y="92" width="38" height="11" rx="5.5" fill="url(#pad)" stroke="none"/>
+    <rect x="124" y="156" width="26" height="14" rx="7" fill="url(#pad)" stroke="none"/></g>
+    <use href="#stackL" x="150" y="94"/></symbol>
+  <symbol id="g-hantel" viewBox="0 0 24 24"><path d="M3 10v4M6 7.5v9M18 7.5v9M21 10v4M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="g-lauf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4.5" r="1.8"/><path d="M8 9.5l4-2 3 3 3 1"/><path d="M12 7.5l-2 6 4 3v4.5"/><path d="M10 13.5l-2.5 3.5H4"/></g></symbol>
+  <symbol id="m-rueckenstrecker" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M28 177h140" stroke-width="8"/>
+    <path d="M40 170L138 84" stroke-width="9"/><path d="M138 84L150 177" stroke-width="8"/>
+    <path d="M58 154l-10 -12" stroke-width="5"/>
+    <rect x="40" y="134" width="30" height="8" rx="4" transform="rotate(-41 55 138)" fill="#3A403C" stroke="none"/>
+    <rect x="58" y="114" width="14" height="14" rx="7" fill="url(#pad)" stroke="none"/>
+    <rect x="104" y="70" width="58" height="16" rx="8" transform="rotate(-41 133 78)" fill="url(#pad)" stroke="none"/></g></symbol>
+  <symbol id="m-wadenheber" viewBox="0 0 200 200"><g stroke="#2A2F2C" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <ellipse cx="100" cy="181" rx="78" ry="6" fill="#000" fill-opacity=".07" stroke="none"/>
+    <path d="M24 177h146" stroke-width="8"/>
+    <path d="M62 177V26" stroke-width="9"/><path d="M28 30h34" stroke-width="7"/><path d="M30 36v56M42 36v56" stroke-width="3"/>
+    <path d="M62 66h62" stroke-width="7"/><path d="M118 66v-10" stroke-width="5"/>
+    <rect x="86" y="68" width="40" height="13" rx="6.5" fill="url(#pad)" stroke="none"/>
+    <rect x="86" y="156" width="52" height="12" rx="4" fill="#3A403C" stroke="none"/>
+    <path d="M62 168h24" stroke-width="6"/></g>
+    <use href="#stackL" x="25" y="94"/></symbol>
+  <symbol id="s-matte" viewBox="0 0 200 200">
+    <ellipse cx="112" cy="181" rx="80" ry="6" fill="#000" fill-opacity=".07"/>
+    <g stroke-linecap="round" fill="none">
+      <g stroke="#C9D6C8" stroke-width="5"><path d="M104 40h58M104 56h58M104 72h58M104 88h58M104 104h58M104 120h58M104 136h58M104 152h58"/></g>
+      <path d="M100 22V172M166 22V172" stroke="#8F9993" stroke-width="7"/></g>
+    <rect x="60" y="166" width="120" height="8" rx="3" fill="url(#pad)"/>
+    <circle cx="60" cy="155" r="19" fill="url(#pad)"/>
+    <path d="M60 143a12 12 0 1 1 -11.6 15M60 150a5 5 0 1 1 -4.8 6.2" fill="none" stroke="#86A088" stroke-width="2.6" stroke-linecap="round"/></symbol>
+</defs></svg>
