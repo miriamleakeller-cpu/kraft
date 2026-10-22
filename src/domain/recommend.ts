@@ -1,6 +1,6 @@
 import { LEG_REGIONS, rules } from '../config/rules';
 import { exposureSince, sessionExposure } from './coverage';
-import type { Exercise, GymSession, Region, Run } from './types';
+import { workSets, type Exercise, type GymSession, type Region, type Run } from './types';
 
 // Empfehlung während des Trainings. Deterministisch und nachvollziehbar:
 // jede Übung bekommt Punkte aus wenigen, festen Gründen. Gleiche Eingabe, gleiches Ergebnis.
@@ -20,8 +20,8 @@ export interface Ranked {
   setsDone: number;
   /** alle vorgesehenen Sätze erledigt */
   done: boolean;
-  /** ein dritter Satz wäre sinnvoll und die Zeit reicht */
-  thirdSet: boolean;
+  /** ein Zusatzsatz wäre sinnvoll und die Zeit reicht */
+  extraSet: boolean;
 }
 
 export interface Recommendation {
@@ -40,15 +40,16 @@ export function recommend({ library, session, history, runs, now }: RecommendInp
   const lastRun = runs.map((r) => Date.parse(r.date)).filter((t) => t <= now.getTime()).sort((a, b) => b - a)[0];
   const afterRun = lastRun != null && now.getTime() - lastRun < rules.runLegHours * HOUR;
   const lastGym = [...history].sort((a, b) => b.startedAt.localeCompare(a.startedAt))[0];
-  const lastSet = session.sets[session.sets.length - 1];
+  const work = workSets(session);
+  const lastSet = work[work.length - 1];
   const lastPattern = lastSet ? library.find((e) => e.id === lastSet.exerciseId)?.pattern : undefined;
 
   const elapsed = (now.getTime() - Date.parse(session.startedAt)) / 60_000;
-  const minutesLeft = Math.max(0, session.plannedMinutes - rules.cooldownMinutes - elapsed);
+  const minutesLeft = Math.max(0, session.plannedMinutes - elapsed);
   const coreCovered = rules.coreRegions.every((r) => (today[r] ?? 0) >= 1);
 
   const all = library.map((exercise): Ranked => {
-    const setsDone = session.sets.filter((s) => s.exerciseId === exercise.id).length;
+    const setsDone = work.filter((s) => s.exerciseId === exercise.id).length;
     const done = setsDone >= exercise.sets;
     let score = 0;
 
@@ -68,11 +69,11 @@ export function recommend({ library, session, history, runs, now }: RecommendInp
     if (exercise.optional) {
       score -= 0.5;
       // optionale Übungen wechseln sich zwischen den Besuchen ab
-      if (lastGym?.sets.some((s) => s.exerciseId === exercise.id)) score -= 1;
+      if (lastGym && workSets(lastGym).some((s) => s.exerciseId === exercise.id)) score -= 1;
     }
 
-    const thirdSet = !!exercise.thirdSet && setsDone === exercise.sets && coreCovered && minutesLeft >= 8;
-    return { exercise, score, setsDone, done, thirdSet };
+    const extraSet = !!exercise.extraSet && setsDone === exercise.sets && coreCovered && minutesLeft >= rules.extraSetMinutes;
+    return { exercise, score, setsDone, done, extraSet };
   });
 
   const order = (a: Ranked, b: Ranked) => b.score - a.score || a.exercise.order - b.exercise.order;

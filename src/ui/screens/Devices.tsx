@@ -1,9 +1,10 @@
 import { useState } from 'preact/hooks';
 import { REGION_LABEL, library } from '../../config/library';
 import { performances, suggest } from '../../domain/progression';
-import { recommend } from '../../domain/recommend';
+import { recommend, type Ranked } from '../../domain/recommend';
+import { rules } from '../../config/rules';
 import type { Exercise } from '../../domain/types';
-import { Icon, Pic, Pips, Round, kg, regionsText, target } from '../parts';
+import { Icon, Pic, Round, kg, regionsText, target } from '../parts';
 import { stateFor, stepsFor, useStore, type Store } from '../store';
 
 /** Vorschlag für heute in Worten, z. B. «42,5 kg». */
@@ -14,58 +15,100 @@ export function todayValue(store: Store, ex: Exercise) {
   return s.weight != null ? `${kg(s.weight)} kg` : 'Gewicht wählen';
 }
 
-export function SessionDevices({ onPick, onCooldown, onBack }: { onPick: (id: string) => void; onCooldown: () => void; onBack: () => void }) {
+export function SessionDevices({
+  warmup,
+  onPick,
+  onEndWarmup,
+  onFinish,
+  onBack,
+}: {
+  warmup: boolean;
+  onPick: (id: string) => void;
+  onEndWarmup: () => void;
+  onFinish: () => void;
+  onBack: () => void;
+}) {
   const store = useStore();
   const s = store.active!;
   const r = recommend({ library: store.lib, session: s, history: store.history, runs: store.runs, now: new Date() });
-  const top = new Set(r.top.map((t) => t.exercise.id));
   const minutes = Math.round((Date.now() - Date.parse(s.startedAt)) / 60000);
+
+  // Beim Aufwärmen werden die grossen Übungen vorgeschlagen, die noch nicht aufgewärmt sind.
+  const warmed = new Set(s.sets.filter((x) => x.warmup).map((x) => x.exerciseId));
+  const top = warmup
+    ? rules.warmupExercises
+        .filter((id) => !warmed.has(id))
+        .map((id) => r.all.find((x) => x.exercise.id === id))
+        .filter((x): x is Ranked => !!x)
+    : r.top;
+  const topIds = new Set(top.map((t) => t.exercise.id));
+  // Optionale Geräte zählen nicht zum Durchgang.
+  const core = r.all.filter((x) => !x.exercise.optional);
+  const left = core.filter((x) => !x.done).length;
+
   return (
     <div class="screen">
       <div class="nav">
         <Round onClick={onBack} label="Zur Startseite">
           <Icon name="back" />
         </Round>
-        <span class="meta num">Krafttraining · {minutes} Min.</span>
-        <button class="link" onClick={onCooldown}>
-          Cool-down
-        </button>
+        <span class="meta num">{minutes} Min.</span>
+        {warmup ? (
+          <button class="link" onClick={onEndWarmup}>
+            Überspringen
+          </button>
+        ) : (
+          <button class="link" onClick={onFinish}>
+            Beenden
+          </button>
+        )}
       </div>
-      <div class="h1" style={{ marginTop: 10 }}>Geräte</div>
+      <div class="h1" style={{ marginTop: 10 }}>{warmup ? 'Aufwärmen' : 'Geräte'}</div>
+      <div class="sub">
+        {warmup
+          ? `${Math.min(warmed.size, rules.warmupSets)} von ${rules.warmupSets} · ein paar Geräte mit wenig Gewicht`
+          : left
+            ? `Noch ${left} von ${core.length} · ein Satz pro Gerät`
+            : 'Alle Geräte erledigt'}
+      </div>
 
-      <div class="label">Empfohlen</div>
-      {r.top.map((t, i) => (
+      <div class="label">{warmup ? 'Zum Aufwärmen' : 'Empfohlen'}</div>
+      {top.map((t, i) => (
         <button class="tile item press" onClick={() => onPick(t.exercise.id)}>
           <Pic id={t.exercise.image} size={72} />
           <div class="tx">
             <b>{t.exercise.name}</b>
             <div class="sub">{regionsText(t.exercise, REGION_LABEL)}</div>
-            <div class="val num">
-              {target(t.exercise)} · {todayValue(store, t.exercise)}
-            </div>
+            <div class="val num">{warmup ? 'leicht, 15 Wdh.' : `${target(t.exercise)} · ${todayValue(store, t.exercise)}`}</div>
           </div>
-          {t.setsDone > 0 ? <Pips done={t.setsDone} total={t.exercise.sets} /> : <span class="rec-n">{i + 1}</span>}
+          <span class="rec-n">{i + 1}</span>
         </button>
       ))}
-      {r.top.length === 0 && <p class="note">Alle Geräte sind erledigt. Weiter zum Cool-down, wann immer du magst.</p>}
+      {!warmup && top.length === 0 && <p class="note">Alle Geräte sind erledigt.</p>}
 
       <div class="label">Alle Geräte</div>
       <div>
         {r.all
-          .filter((x) => !top.has(x.exercise.id))
+          .filter((x) => !topIds.has(x.exercise.id))
           .map((x) => (
-            <button class={`mini ${x.done ? 'done' : ''}`} onClick={() => onPick(x.exercise.id)}>
+            <button class={`mini ${x.done && !warmup ? 'done' : ''}`} onClick={() => onPick(x.exercise.id)}>
               <Pic id={x.exercise.image} size={44} radius={13} />
               <b>{x.exercise.name}</b>
-              {x.thirdSet && <span class="chip">3. Satz möglich</span>}
-              <Pips done={Math.min(x.setsDone, x.exercise.sets)} total={x.exercise.sets} />
+              {!warmup && x.extraSet && <span class="chip">Zusatzsatz möglich</span>}
+              {!warmup && x.done && !x.extraSet && <Icon name="check" />}
             </button>
           ))}
       </div>
       <div style={{ height: 24 }} />
-      <button class="cta ghost" onClick={onCooldown}>
-        Zum Cool-down
-      </button>
+      {warmup ? (
+        <button class="cta ghost" onClick={onEndWarmup}>
+          Aufwärmen beenden
+        </button>
+      ) : (
+        <button class={`cta ${left ? 'ghost' : ''}`} onClick={onFinish}>
+          Training abschliessen
+        </button>
+      )}
     </div>
   );
 }

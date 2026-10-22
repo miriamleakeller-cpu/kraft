@@ -1,5 +1,6 @@
 import { rules } from '../config/rules';
 import type { Exercise, Feel, GymSession, SetLog } from './types';
+import { workSets } from './types';
 
 // Gewichtsvorschlag nach doppelter Progression, bewusst vorsichtig:
 // - Erhöhen erst nach zwei Einheiten in Folge mit oberem Wiederholungsbereich und ohne «Sehr streng».
@@ -31,7 +32,7 @@ const DAY = 86_400_000;
 export function performances(exerciseId: string, sessions: GymSession[]): Performance[] {
   const out: Performance[] = [];
   for (const s of sessions) {
-    const sets = s.sets.filter((x) => x.exerciseId === exerciseId);
+    const sets = workSets(s).filter((x) => x.exerciseId === exerciseId);
     if (!sets.length) continue;
     out.push(summarise(s.startedAt, sets));
   }
@@ -103,4 +104,12 @@ export function suggest(ex: Exercise, history: Performance[], steps: number[], n
     return { weight: shiftStep(steps, base, -1), reps: lo, note: 'gesenkt' };
   }
   return { weight: shiftStep(steps, base, 0), reps: Math.min(Math.max(Math.max(...last.reps), lo), hi) };
+}
+
+/** Aufwärmsatz: etwa halbes Arbeitsgewicht, mehr Wiederholungen. */
+export function warmupSuggestion(ex: Exercise, work: Suggestion, steps: number[]): Suggestion {
+  if (ex.measure === 'zeit') return { seconds: ex.range[0] };
+  if (ex.measure === 'wiederholungen') return { reps: rules.warmupReps };
+  const base = work.weight ?? steps[Math.floor(steps.length / 6)] ?? 0;
+  return { weight: shiftStep(steps, base * rules.warmupFactor, 0), reps: rules.warmupReps };
 }

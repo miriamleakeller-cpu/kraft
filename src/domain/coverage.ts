@@ -1,4 +1,4 @@
-import type { Exercise, GymSession, Region } from './types';
+import { workSets, type Exercise, type GymSession, type Region } from './types';
 
 // Abdeckung: An wie vielen Trainingstagen wurde ein Bereich belastet?
 // Hauptbelastung zählt voll, Mitbeteiligung halb. Pro Tag zählt ein Bereich höchstens einmal.
@@ -7,7 +7,7 @@ export type Exposure = Partial<Record<Region, number>>;
 
 export function sessionExposure(session: GymSession, lib: Exercise[]): Exposure {
   const out: Exposure = {};
-  const done = new Set(session.sets.map((s) => s.exerciseId));
+  const done = new Set(workSets(session).map((s) => s.exerciseId));
   for (const id of done) {
     const ex = lib.find((e) => e.id === id);
     if (!ex) continue;

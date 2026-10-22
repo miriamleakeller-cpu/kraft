@@ -6,7 +6,6 @@ export function Settings({ onClose, toast }: { onClose: () => void; toast: (t: s
   const store = useStore();
   const file = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
-  const soundOn = store.meta.soundOn !== false;
 
   const doExport = async () => {
     setBusy(true);
@@ -53,12 +52,6 @@ export function Settings({ onClose, toast }: { onClose: () => void; toast: (t: s
       <div class="sheet" role="dialog" aria-label="Einstellungen">
         <div class="grip" />
         <div class="h1" style={{ fontSize: 26 }}>Einstellungen</div>
-
-        <div class="label">Pause</div>
-        <div class="tile field">
-          <label>Signalton nach der Pause</label>
-          <button class={`toggle ${soundOn ? 'on' : ''}`} role="switch" aria-checked={soundOn} onClick={() => store.actions.patchMeta({ soundOn: !soundOn })} />
-        </div>
 
         <div class="label">Daten</div>
         <p class="note" style={{ marginBottom: 12 }}>

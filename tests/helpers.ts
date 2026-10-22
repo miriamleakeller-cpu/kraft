@@ -17,3 +17,6 @@ export const two = (exerciseId: string, weight: number, reps: [number, number], 
   { exerciseId, weight, reps: reps[0] },
   { exerciseId, weight, reps: reps[1], feel },
 ];
+
+/** ein Arbeitssatz */
+export const one = (exerciseId: string, weight: number, reps: number, feel?: SetLog['feel']): Partial<SetLog>[] => [{ exerciseId, weight, reps, feel }];

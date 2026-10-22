@@ -23,19 +23,33 @@ Beinpresse, Beinbeuger, Brustpresse, Latzug, Rudern sitzend, Schulterpresse,
 Rückenstrecker, Dead Bug (Matte), Unterarmstütz (Matte), Wadenheber (optional).
 Jeder Bereich hat mindestens eine Übung mit Hauptbelastung.
 
+## Ablauf (ähnlich EGYM)
+
+Ein Durchgang an allen Geräten, etwa 30 Minuten, ohne Pausentimer und ohne Cool-down.
+
+1. **Aufwärmen**: drei grosse Übungen (Beinpresse, Rudern, Brustpresse) mit etwa halbem
+   Arbeitsgewicht und 15 Wiederholungen. Danach beginnt der Durchgang von selbst.
+   Aufwärmsätze zählen weder für die Abdeckung noch für die Gewichtsvorschläge.
+2. **Durchgang**: ein Arbeitssatz pro Gerät, in frei wählbarer Reihenfolge. Die App empfiehlt
+   jeweils drei Geräte. Der Wechsel zum nächsten Gerät ist die Pause.
+3. **Rückmeldung** direkt beim Speichern des Satzes: Leicht, Passend oder Sehr streng.
+
 ## Sätze und Wiederholungen
 
-- **Faustregel** 2 Sätze pro Übung, 8–12 Wiederholungen. Rückenstrecker und Wadenheber 10–15,
-  Unterarmstütz 20–45 Sekunden.
-- **Faustregel** Einen Satz etwa zwei bis drei Wiederholungen vor dem Muskelversagen beenden.
-- Ein dritter Satz wird nur bei Beinpresse, Brustpresse und Latzug angeboten, und nur,
-  wenn alle Bereiche heute schon vorkamen und noch mindestens 8 Minuten bleiben.
-- **Faustregel** Pausen: 2 Minuten bei der Beinpresse, 90 Sekunden an den übrigen Geräten,
-  60–75 Sekunden auf der Matte.
+- **belegt** Schon ein Satz pro Übung verbessert Kraft deutlich. Mehr Sätze bringen mehr,
+  aber mit abnehmendem Zusatznutzen. Für die gesundheitlichen Ziele genügt ein Satz pro Gerät
+  an zwei Tagen pro Woche. Muskelkräftigung von 30–60 Minuten pro Woche ist in
+  Beobachtungsstudien mit dem grössten gesundheitlichen Nutzen verbunden.
+- **Faustregel** 8–12 Wiederholungen, den Satz etwa zwei bis drei Wiederholungen vor dem
+  Muskelversagen beenden. Rückenstrecker und Wadenheber 10–15, Unterarmstütz 20–45 Sekunden.
+- Ein **Zusatzsatz** wird bei Beinpresse, Brustpresse und Latzug angeboten, wenn alle Bereiche
+  heute schon vorkamen und noch mindestens 4 Minuten der geplanten Zeit übrig sind.
+- Ein Durchgang mit 7 Geräten deckt alle acht Bereiche ab (automatischer Test).
 
 ## Empfehlungen während des Trainings
 
 Jede Übung erhält Punkte. Die drei höchsten werden empfohlen, alle anderen bleiben wählbar.
+Eine Übung gilt nach ihrem Arbeitssatz als erledigt.
 
 | Grund | Wirkung |
 | --- | --- |
@@ -48,8 +62,6 @@ Jede Übung erhält Punkte. Die drei höchsten werden empfohlen, alle anderen bl
 
 - Die drei Vorschläge ergänzen sich: Ist ein Bereich schon durch einen Vorschlag abgedeckt,
   zählt er für die übrigen weniger.
-- Eine Übung verlässt die Empfehlungen, sobald ihre Sätze erledigt sind.
-- Angefangene Übungen stehen in «Alle Geräte» zuoberst.
 - Bei Gleichstand entscheidet die feste Reihenfolge der Bibliothek. Gleiche Daten ergeben
   immer dieselbe Empfehlung.
 - **Annahme** Die Erholungszeit von 48 Stunden und die Rücksicht auf den Long Run sind
@@ -61,9 +73,9 @@ Jede Übung erhält Punkte. Die drei höchsten werden empfohlen, alle anderen bl
 - **Erstes Mal**: kein Vorschlag. Du wählst ein Gewicht für etwa 12 Wiederholungen
   mit zwei bis drei in Reserve.
 - **Erhöhen** um eine Stufe, wenn in zwei Trainings hintereinander bei gleichem Gewicht
-  alle Sätze den oberen Bereich erreichten und keiner «Sehr streng» war.
+  der Arbeitssatz den oberen Bereich erreichte und keiner «Sehr streng» war.
 - **Senken** um eine Stufe, wenn zwei Trainings hintereinander «Sehr streng» waren oder
-  alle Sätze unter dem unteren Bereich blieben.
+  der Arbeitssatz unter dem unteren Bereich blieb.
 - **Sonst** gleich bleiben. Nie mehr als eine Stufe pro Training.
 - **Nach einer Pause** (ab 4 Wochen eine Stufe, ab 8 Wochen zwei Stufen weniger) wird ein
   vorsichtigerer Einstieg vorgeschlagen. Ist dieser Einstieg «Leicht» oder «Passend» und

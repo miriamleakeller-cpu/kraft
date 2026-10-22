@@ -56,9 +56,7 @@ export const regionsText = (ex: Exercise, labels: Record<string, string>) =>
 export const kg = (n: number) => n.toLocaleString('de-CH', { maximumFractionDigits: 2 });
 
 export const target = (ex: Exercise) =>
-  ex.measure === 'zeit'
-    ? `${ex.sets} × ${ex.range[0]}–${ex.range[1]} Sek.`
-    : `${ex.sets} × ${ex.range[0]}–${ex.range[1]}${ex.perSide ? ' pro Seite' : ''}`;
+  ex.measure === 'zeit' ? `${ex.range[0]}–${ex.range[1]} Sek.` : `${ex.range[0]}–${ex.range[1]} Wdh.${ex.perSide ? ' pro Seite' : ''}`;
 
 export const clock = (sec: number) => {
   const s = Math.max(0, Math.round(sec));

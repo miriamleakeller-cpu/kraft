@@ -50,10 +50,10 @@ export interface Exercise {
   /** Wiederholungsbereich oder, bei Haltezeit, Sekunden */
   range: [number, number];
   perSide?: boolean;
+  /** Arbeitssätze pro Training */
   sets: number;
-  /** darf einen dritten Satz vorgeschlagen bekommen */
-  thirdSet?: boolean;
-  restSec: number;
+  /** darf einen Zusatzsatz vorgeschlagen bekommen, wenn Zeit bleibt */
+  extraSet?: boolean;
   /** Standard-Gewichtsstufen, falls für das Gerät nichts eingetragen ist */
   weightSteps?: number[];
   settings: SettingField[];
@@ -79,10 +79,12 @@ export interface SetLog {
   reps?: number;
   seconds?: number;
   feel?: Feel;
+  /** Aufwärmsatz mit wenig Gewicht: zählt weder für Abdeckung noch für Gewichtsvorschläge */
+  warmup?: boolean;
   at: string;
 }
 
-export type Phase = 'aufwaermen' | 'kraft' | 'cooldown' | 'fertig';
+export type Phase = 'aufwaermen' | 'kraft' | 'fertig';
 
 export interface GymSession {
   id: string;
@@ -91,10 +93,10 @@ export interface GymSession {
   phase: Phase;
   plannedMinutes: number;
   sets: SetLog[];
-  /** Ende der laufenden Pause, damit der Timer einen App-Wechsel übersteht */
-  restEndsAt?: string;
-  restPausedRemaining?: number;
 }
+
+/** Nur die Arbeitssätze, ohne Aufwärmen. */
+export const workSets = (s: GymSession) => s.sets.filter((x) => !x.warmup);
 
 export interface Run {
   id: string;

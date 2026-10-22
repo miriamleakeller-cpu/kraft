@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'p
 import { library } from '../config/library';
 import { rules } from '../config/rules';
 import { exerciseState, meta as metaStore, persistStorage, runs as runStore, sessions as sessionStore, type Meta } from '../data/db';
-import type { Exercise, ExerciseState, Feel, GymSession, Phase, Run, SetLog } from '../domain/types';
+import { workSets, type Exercise, type ExerciseState, type GymSession, type Phase, type Run, type SetLog } from '../domain/types';
 
 // Zustand der App. Jede Änderung wird zuerst gespeichert und erst dann angezeigt,
 // damit beim Wechsel in eine andere App oder einem Absturz nichts verloren geht.
@@ -46,7 +46,7 @@ function useStoreValue() {
   }, [load]);
 
   const active = state.sessions.find((s) => s.id === state.meta.activeSessionId && !s.endedAt);
-  const history = state.sessions.filter((s) => s !== active && s.sets.length > 0);
+  const history = state.sessions.filter((s) => s !== active && workSets(s).length > 0);
 
   const putSession = useCallback(
     async (s: GymSession) => {
@@ -88,29 +88,19 @@ function useStoreValue() {
       await patchMeta({ activeSessionId: s.id });
     },
     setPhase: (phase: Phase) => updateActive((s) => ({ ...s, phase })),
-    addSet: (set: Omit<SetLog, 'at'>, restSec: number) =>
+    addSet: (set: Omit<SetLog, 'at'>) =>
       updateActive((s) => {
-        const at = new Date();
-        s.sets.push({ ...set, at: at.toISOString() });
-        s.restEndsAt = new Date(at.getTime() + restSec * 1000).toISOString();
-        s.restPausedRemaining = undefined;
+        s.sets.push({ ...set, at: new Date().toISOString() });
         return s;
       }),
-    setLastFeel: (feel: Feel | undefined) =>
-      updateActive((s) => {
-        const last = s.sets[s.sets.length - 1];
-        if (last) last.feel = feel;
-        return s;
-      }),
-    setRest: (restEndsAt: string | undefined, restPausedRemaining?: number) =>
-      updateActive((s) => ({ ...s, restEndsAt, restPausedRemaining })),
     async finishSession() {
       if (!active) return;
-      if (active.sets.length === 0) {
+      // Ein Training nur mit Aufwärmsätzen wird nicht aufbewahrt.
+      if (workSets(active).length === 0) {
         await sessionStore.remove(active.id);
         setState((st) => ({ ...st, sessions: st.sessions.filter((x) => x.id !== active.id) }));
       } else {
-        await putSession({ ...active, phase: 'fertig', endedAt: new Date().toISOString(), restEndsAt: undefined });
+        await putSession({ ...active, phase: 'fertig', endedAt: new Date().toISOString() });
       }
       await patchMeta({ activeSessionId: undefined });
     },

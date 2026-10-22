@@ -10,7 +10,6 @@ export const DB_VERSION = 1;
 export interface Meta {
   activeSessionId?: string;
   lastBackupAt?: string;
-  soundOn?: boolean;
 }
 
 interface KraftDB extends DBSchema {

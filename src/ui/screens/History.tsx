@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks';
+import { workSets } from '../../domain/types';
 import { useStore } from '../store';
 import { Sym } from '../parts';
 
@@ -78,7 +79,7 @@ export function History() {
           <div style={{ marginTop: 12 }}>
             {gym.length === 0 && <p class="note">Noch keine Trainings.</p>}
             {gym.map((s) => {
-              const n = new Set(s.sets.map((x) => x.exerciseId)).size;
+              const n = new Set(workSets(s).map((x) => x.exerciseId)).size;
               const min = s.endedAt ? Math.round((Date.parse(s.endedAt) - Date.parse(s.startedAt)) / 60000) : null;
               return (
                 <div class="log">
@@ -88,7 +89,7 @@ export function History() {
                   <div class="tx">
                     <b>Krafttraining</b>
                     <span>
-                      {n} Übungen · {s.sets.length} Sätze{min != null ? ` · ${min} Min.` : ''}
+                      {n} Geräte{min != null ? ` · ${min} Min.` : ''}
                     </span>
                   </div>
                   <em>{new Date(s.startedAt).toLocaleDateString('de-CH', { weekday: 'short', day: 'numeric', month: 'short' })}</em>

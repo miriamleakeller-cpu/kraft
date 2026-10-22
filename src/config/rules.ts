@@ -22,10 +22,16 @@ export const rules = {
   recoveryHours: 48,
   /** Nach dem Long Run Beingeräte in dieser Zeit etwas nach hinten */
   runLegHours: 24,
-  plannedMinutes: 50,
-  cooldownMinutes: 6,
-  /** grobe Dauer eines Satzes inklusive Pause, für die Zeitplanung */
-  minutesPerSet: 2.2,
+  /** Ein Durchgang an allen Geräten, ähnlich wie bei EGYM */
+  plannedMinutes: 30,
+  /** Zusatzsatz nur, wenn danach noch so viel Zeit bleibt */
+  extraSetMinutes: 4,
+
+  // Aufwärmen: ein paar grosse Übungen mit wenig Gewicht
+  warmupExercises: ['beinpresse', 'rudern', 'brustpresse'],
+  warmupSets: 3,
+  warmupFactor: 0.5,
+  warmupReps: 15,
 
   // Gewichtsanpassung
   pauseCautionDays: 28,

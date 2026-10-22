@@ -30,7 +30,7 @@ export function Today({ onOpenSession, onSettings }: { onOpenSession: () => void
         <div class="row">
           <div>
             <div class="t">{store.active ? 'Training fortsetzen' : 'Krafttraining'}</div>
-            <div class="s">{store.active ? `${store.active.sets.length} Sätze gespeichert` : 'Aufwärmen · Geräte · Cool-down'}</div>
+            <div class="s">{store.active ? `${store.active.sets.length} Sätze gespeichert` : 'Ein Durchgang · ca. 30 Min.'}</div>
           </div>
           <span class="arrow">
             <Icon name="arrow" />

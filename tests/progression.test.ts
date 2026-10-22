@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { byId } from '../src/config/library';
-import { performances, shiftStep, suggest } from '../src/domain/progression';
+import { performances, shiftStep, suggest, warmupSuggestion } from '../src/domain/progression';
 import { session, two } from './helpers';
 
 const latzug = byId('latzug')!;
@@ -77,5 +77,21 @@ describe('Gewichtsvorschlag', () => {
       session('2026-10-17T10:00:00Z', sets([30, 30])),
     ]);
     expect(suggest(plank, h, [], now).seconds).toBe(30);
+  });
+
+  it('erhöht auch mit nur einem Satz pro Training nach zwei passenden Einheiten', () => {
+    const one = (date: string, feel: 'leicht' | 'passend') => session(date, [{ exerciseId: 'latzug', weight: 40, reps: 12, feel }]);
+    const h = hist(one('2026-10-13T10:00:00Z', 'passend'), one('2026-10-17T10:00:00Z', 'leicht'));
+    expect(suggest(latzug, h, steps, now).weight).toBe(42.5);
+  });
+
+  it('lässt Aufwärmsätze bei den Gewichtsvorschlägen aussen vor', () => {
+    const h = hist(session('2026-10-17T10:00:00Z', [{ exerciseId: 'latzug', weight: 20, reps: 15, warmup: true }, { exerciseId: 'latzug', weight: 40, reps: 10 }]));
+    expect(h[0]).toMatchObject({ weight: 40, reps: [10] });
+  });
+
+  it('schlägt zum Aufwärmen etwa das halbe Arbeitsgewicht vor', () => {
+    expect(warmupSuggestion(latzug, { weight: 40 }, steps)).toEqual({ weight: 20, reps: 15 });
+    expect(warmupSuggestion(latzug, { weight: 42.5 }, steps).weight).toBe(20);
   });
 });
